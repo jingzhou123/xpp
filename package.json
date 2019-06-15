@@ -1,0 +1,20 @@
+{
+  "name": "zxx",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ts-morph": "^2.3.0",
+    "yargs": "^13.2.4"
+  },
+  "bin": "bin/index",
+  "devDependencies": {
+    "@types/node": "^11.12.2",
+    "typescript": "^3.5.1"
+  },
+  "scripts": {
+    "start": "tsc --build tsconfig.json --watch",
+    "build": "rm -rf lib && tsc --build tsconfig.json",
+    "prepublishOnly": "npm run build"
+  }
+}
