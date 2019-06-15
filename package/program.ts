@@ -35,9 +35,32 @@ export class Program {
                         writer.write(method.getReturnType().getText())
                     },
                     statements: (writer) => {
-                        // const returnTypeTxt = method.getReturnTypeNodeOrThrow().getText()
+                        const returnTypeTxt = method.getReturnTypeNodeOrThrow().getText()
+                        if (!returnTypeTxt.match(/^Promise<[^>]+>/)) {
+                            throw new Error('return type must be Promise') 
+                        }
                         // console.log('return type:', returnTypeTxt)
-                        writer.write('return Promise.resolve({})')
+                        const resolvedReturnType = method.getReturnType().getTypeArguments()[0]
+                        console.log('resolved return type:', resolvedReturnType.getText())
+                        let resolveContent = ''
+                        switch (resolvedReturnType.getText()) {
+                            case 'number':
+                                resolveContent = Math.floor(100 * Math.random()) + ''
+                                break;
+                            case 'string':
+                                resolveContent = '"randomString"'
+                                break;
+                            case 'void':
+                                resolveContent = ''
+                                break;
+                            case 'boolean':
+                                resolveContent = Math.random() > 0.5 ? 'true' : 'false'
+                                break;
+                            default:
+                                resolveContent = '{}'
+                                break;
+                        }
+                        writer.write(`return Promise.resolve(${resolveContent})`)
                     }
                 }
             })
