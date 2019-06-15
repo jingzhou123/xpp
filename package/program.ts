@@ -1,4 +1,4 @@
-import { Project } from 'ts-morph'
+import { Project, SymbolFlags } from 'ts-morph'
 import * as path from 'path'
 
 export class Program {
@@ -26,13 +26,17 @@ export class Program {
         mockApiSrc.addClass({
             isExported: true,
             name: onlyClass.getName(),
-            methods: methodList.map(item => {
+            methods: methodList.map(method => {
+                console.log('mocking api:', method.getName())
                 return {
-                    name: item.getName(),
+                    name: method.getName(),
+                    parameters: method.getParameters().map(para => para.getStructure()),
                     returnType: (writer) => {
-                        writer.write(item.getReturnType().getText())
+                        writer.write(method.getReturnType().getText())
                     },
                     statements: (writer) => {
+                        // const returnTypeTxt = method.getReturnTypeNodeOrThrow().getText()
+                        // console.log('return type:', returnTypeTxt)
                         writer.write('return Promise.resolve({})')
                     }
                 }
