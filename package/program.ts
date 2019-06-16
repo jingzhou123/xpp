@@ -1,4 +1,4 @@
-import { Project, SymbolFlags } from 'ts-morph'
+import { Project, ts, Type } from 'ts-morph'
 import * as path from 'path'
 
 export class Program {
@@ -42,29 +42,26 @@ export class Program {
                         // console.log('return type:', returnTypeTxt)
                         const resolvedReturnType = method.getReturnType().getTypeArguments()[0]
                         console.log('resolved return type:', resolvedReturnType.getText())
-                        let resolveContent = ''
-                        switch (resolvedReturnType.getText()) {
-                            case 'number':
-                                resolveContent = Math.floor(100 * Math.random()) + ''
-                                break;
-                            case 'string':
-                                resolveContent = '"randomString"'
-                                break;
-                            case 'void':
-                                resolveContent = ''
-                                break;
-                            case 'boolean':
-                                resolveContent = Math.random() > 0.5 ? 'true' : 'false'
-                                break;
-                            default:
-                                resolveContent = '{}'
-                                break;
-                        }
-                        writer.write(`return Promise.resolve(${resolveContent})`)
+                        writer.write(`return Promise.resolve(${this.resolveMock(resolvedReturnType)})`)
                     }
                 }
             })
         })
         prj.save()
+    }
+    private resolveMock(returnType: Type<ts.Type>) {
+        if (returnType.isString()) {
+            return '"any-ramdom-string"' 
+        } else if (returnType.isNumber()) {
+            return 100020 
+        } else if (returnType.isNullable()) {
+            return 'void'
+        } else if (returnType.getText() === 'void') {
+            return ''
+        } else if (returnType.isBoolean()) {
+            return true 
+        } else {
+            return '{}'
+        }
     }
 }

@@ -4,11 +4,11 @@ export class AnyApi {
     }
 
     getList1(id: number): Promise<string> {
-        return Promise.resolve("randomString")
+        return Promise.resolve("any-ramdom-string")
     }
 
     getList2(id: number): Promise<number> {
-        return Promise.resolve(84)
+        return Promise.resolve(100020)
     }
 
     getList3(id: number): Promise<void> {
