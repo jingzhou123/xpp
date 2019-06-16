@@ -1,4 +1,4 @@
-import { Project, ts, Type } from 'ts-morph'
+import { Project, ts, Type, CodeBlockWriter } from 'ts-morph'
 import * as path from 'path'
 
 export class Program {
@@ -51,8 +51,10 @@ export class Program {
     }
     private resolveMock(returnType: Type<ts.Type>) {
         if (returnType.isString()) {
-            return '"any-ramdom-string"' 
-        } else if (returnType.isNumber()) {
+            return "'any-ramdom-string'" 
+        } else if (returnType.isStringLiteral()) {
+            return returnType.getText() 
+        } if (returnType.isNumber()) {
             return 100020 
         } else if (returnType.isNullable()) {
             return 'void'
@@ -60,8 +62,24 @@ export class Program {
             return ''
         } else if (returnType.isBoolean()) {
             return true 
+        } else if (returnType.isObject()) {
+            debugger
+            const cdWriter = this.getCdWriter();
+            cdWriter.block(() => {
+                const props = returnType.getProperties()
+                for (const prop of props) {
+                    console.log('name:', prop.getName(), 'type:', prop.getValueDeclarationOrThrow().getType().getText())
+                    cdWriter.write(`${prop.getName()}: ${this.resolveMock(prop.getValueDeclarationOrThrow().getType())},`)
+                }
+            })
+            return cdWriter.toString()
         } else {
             return '{}'
         }
+    }
+    private getCdWriter() {
+        return new CodeBlockWriter({
+            useSingleQuote: true
+        })
     }
 }

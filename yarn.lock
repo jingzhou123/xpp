@@ -183,6 +183,11 @@ code-block-writer@8.0.0:
   resolved "https://registry.npm.taobao.org/code-block-writer/download/code-block-writer-8.0.0.tgz#bc59193040b51a3e9a9150fe12da09dc74ca2a95"
   integrity sha1-vFkZMEC1Gj6akVD+EtoJ3HTKKpU=
 
+code-block-writer@^9.3.0:
+  version "9.3.0"
+  resolved "https://registry.npm.taobao.org/code-block-writer/download/code-block-writer-9.3.0.tgz#a4ce3c877cd4bf1ff243df35c7b5b0d3f4ec8b69"
+  integrity sha1-pM48h3zUvx/yQ981x7Ww0/Tsi2k=
+
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/collection-visit/download/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"

@@ -1,10 +1,12 @@
 export class AnyApi {
     getList(id: number): Promise<{ foo: "bar"; }> {
-        return Promise.resolve({})
+        return Promise.resolve({
+            foo: "bar",
+        })
     }
 
     getList1(id: number): Promise<string> {
-        return Promise.resolve("any-ramdom-string")
+        return Promise.resolve('any-ramdom-string')
     }
 
     getList2(id: number): Promise<number> {
