@@ -5,6 +5,12 @@ export class AnyApi {
         })
     }
 
+    getList0(id: number): Promise<IGetList0Resp> {
+        return Promise.resolve({
+            foo: "bar",
+        })
+    }
+
     getList1(id: number): Promise<string> {
         return Promise.resolve('any-ramdom-string')
     }

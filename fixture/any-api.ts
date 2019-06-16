@@ -1,8 +1,14 @@
+interface IGetList0Resp {
+    foo: 'bar'
+}
 export class AnyApi {
     constructor(public http: any) {
         
     }
     getList(id: number): Promise<{ foo: 'bar' }> {
+        return this.http.get('list.json')
+    }
+    getList0(id: number): Promise<IGetList0Resp> {
         return this.http.get('list.json')
     }
     getList1(id: number): Promise<string> {

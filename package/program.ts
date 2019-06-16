@@ -62,7 +62,7 @@ export class Program {
             return ''
         } else if (returnType.isBoolean()) {
             return true 
-        } else if (returnType.isObject()) {
+        } else if (returnType.isObject() || returnType.isInterface()) {
             debugger
             const cdWriter = this.getCdWriter();
             cdWriter.block(() => {
