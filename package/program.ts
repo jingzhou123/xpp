@@ -44,7 +44,8 @@ export class Program {
                 }
                 // console.log('return type:', returnTypeTxt)
                 const resolvedReturnType = method.getReturnType().getTypeArguments()[0]
-                console.log('resolved return type:', resolvedReturnType.getText())
+                console.log('resolving method:', method.getName())
+                console.log('resolved mehod return type:', resolvedReturnType.getText())
                 writer.write(`return Promise.resolve(${this.resolveMock(resolvedReturnType)})`)
             })
         }
@@ -76,7 +77,6 @@ export class Program {
             cdWriter.block(() => {
                 const props = returnType.getProperties()
                 for (const prop of props) {
-                    console.log('name:', prop.getName(), 'type:', prop.getValueDeclarationOrThrow().getType().getText())
                     cdWriter.write(`${prop.getName()}: ${this.resolveMock(prop.getValueDeclarationOrThrow().getType())},`)
                 }
             })
