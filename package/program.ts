@@ -13,7 +13,7 @@ export class Program {
         const mockFileName = `${fileName}.mock.ts`
         const mockFilePath = path.dirname(pathStr) + '/' + mockFileName
         if (fs.existsSync(path.resolve(mockFilePath))) {
-            throw new Error('file existed') 
+            throw new Error('file existed')
         }
         fs.copyFileSync(pathStr, mockFilePath)
         const anyApiSrc = prj.addExistingSourceFile(mockFilePath)
@@ -22,14 +22,14 @@ export class Program {
             console.log('class:', classItem.getName())
         }
         if (!classList.length) {
-            throw new Error('not found any class') 
+            throw new Error('not found any class')
         }
         if (classList.length > 1) {
-            throw new Error('only support one class per api file') 
+            throw new Error('only support one class per api file')
         }
         const onlyClass = classList[0]
         if (!onlyClass) {
-            throw new Error('not found any api class') 
+            throw new Error('not found any api class')
         }
         const methodList = onlyClass.getMethods()
         if (!methodList.length) {
