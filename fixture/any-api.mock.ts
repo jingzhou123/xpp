@@ -27,4 +27,30 @@ export class AnyApi {
     getList4(id: number): Promise<boolean> {
         return Promise.resolve(true)
     }
+    getList5(id: number): Promise<{ foo: { foo: { foo: 'bar' }[] }[] }> {
+        return Promise.resolve({
+            foo: [
+            {
+                foo: [
+                {
+                    foo: "bar",
+                }, 
+                {
+                    foo: "bar",
+                }, 
+                ],
+            }, 
+            {
+                foo: [
+                {
+                    foo: "bar",
+                }, 
+                {
+                    foo: "bar",
+                }, 
+                ],
+            }, 
+            ],
+        })
+    }
 }

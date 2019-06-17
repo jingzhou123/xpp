@@ -23,4 +23,7 @@ export class AnyApi {
     getList4(id: number): Promise<boolean> {
         return this.http.get('list.json')
     }
+    getList5(id: number): Promise<{ foo: { foo: { foo: 'bar' }[] }[] }> {
+        return this.http.get('list.json')
+    }
 }

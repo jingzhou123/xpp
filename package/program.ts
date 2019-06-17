@@ -7,6 +7,7 @@ export class Program {
         //
     }
     parseApiFile(pathStr: string) {
+        debugger
         const prj = new Project()
         const fileName = path.basename(pathStr, '.ts')
         const mockFileName = `${fileName}.mock.ts`
@@ -62,8 +63,15 @@ export class Program {
             return ''
         } else if (returnType.isBoolean()) {
             return true
+        } else if (returnType.isArray()) {
+            const cdWriter = this.getCdWriter();
+            cdWriter.write('[');
+            [0, 1].forEach(i => {
+                cdWriter.writeLine(`${this.resolveMock(returnType.getArrayElementTypeOrThrow()) as string}, `)
+            })
+            cdWriter.write(']')
+            return cdWriter.toString()
         } else if (returnType.isObject() || returnType.isInterface()) {
-            debugger
             const cdWriter = this.getCdWriter();
             cdWriter.block(() => {
                 const props = returnType.getProperties()
