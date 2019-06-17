@@ -3,7 +3,7 @@ interface IGetList0Resp {
 }
 export class AnyApi {
     constructor(public http: any) {
-        
+
     }
     getList(id: number): Promise<{ foo: 'bar' }> {
         return this.http.get('list.json')
@@ -21,6 +21,9 @@ export class AnyApi {
         return this.http.get('list.json')
     }
     getList4(id: number): Promise<boolean> {
+        return this.http.get('list.json')
+    }
+    getList5(id: number): Promise<{ foo: 'bar'[] }> {
         return this.http.get('list.json')
     }
 }
